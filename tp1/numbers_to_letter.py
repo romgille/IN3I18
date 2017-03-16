@@ -1,3 +1,13 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+# TP1 Exercice 2
+# Romain Gille E3FI
+# Sujet :
+#   Un Australien à écrit chaque nombre de 1 à 1 000 000 en toutes lettres,
+#   pas en chiffres sur sa machine à écrire. Cela lui a prit 16 années.
+#   A vous de réitérer cet exploit et afficher le resultat à votre écran en
+#   moins de temps que ce monsieur et en FRANCAIS.
+
 def numberToLetters(number):
     newNumber = number
     i = 10
@@ -84,7 +94,7 @@ def numberToLetters(number):
             if int(str(datum)[0]) == 1:
                 nbrSpeciaux = True
             if int(str(datum)[0]) == 2:
-                sentence += dic[20]
+                sentence += dic[20] + '-et-'
             if int(str(datum)[0]) == 3:
                 sentence += dic[30]
             if int(str(datum)[0]) == 4:
@@ -129,13 +139,14 @@ def numberToLetters(number):
             else:
                 sentence += dic[int(str(datum)[0])]
 
-#    if sentence[-1] == "-":
-#        sentence =  sentence[:-1]
+    if sentence[-1] == "-":
+        sentence =  sentence[:-1]
 
     print(sentence)
 
 def main():
-    for i in range(1, 1000000):
+    for i in range(1, 10001):
+        print(i)
         numberToLetters(i)
 #    numberToLetters(70)
 

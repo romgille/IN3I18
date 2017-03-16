@@ -1,4 +1,31 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+# TP1 Exercice 1
 # Romain Gille E3FI
+# Sujet :
+#----------
+#   1- Créer une classe Fraction
+#   2- Implémenter l'algorithme d'euclide pour trouver le PGDC (plus grand
+#       diviseur commun)
+#
+#   Voir https://deptinfo-ensip.univ-poitiers.fr/FILES/PDF/python1a.pdf
+#
+#   Implémenter ensuite ce PGDC de façon récursive.
+#
+#   3- dans la classe fraction, implémenter les operations
+#
+#       addition
+#       soustraction
+#       multiplication
+#       division
+#
+#   La fraction obtenue à la fin doit être réduite, exemple
+#
+#
+#   5/4 + 3/2 = 5/4 + 6/4 = 11/4
+#   3/8 * 2/1 = 6/8 = 3/4
+#----------
+
 
 class Fraction:
 
