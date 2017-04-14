@@ -3,7 +3,7 @@
 # TP1 Exercice 1
 # Romain Gille E3FI
 # Sujet :
-#----------
+# ----------
 #   1- Créer une classe Fraction
 #   2- Implémenter l'algorithme d'euclide pour trouver le PGDC (plus grand
 #       diviseur commun)
@@ -24,45 +24,44 @@
 #
 #   5/4 + 3/2 = 5/4 + 6/4 = 11/4
 #   3/8 * 2/1 = 6/8 = 3/4
-#----------
+# ----------
+
+from __future__ import division
 
 
 class Fraction:
-
     def __init__(self, n, d):
-       self.n = n
-       self.d = d
-
+        self.n = n
+        self.d = d
 
     def pgcd(self):
-        newSelf = Fraction(abs(self.n), abs(self.d))
+        new_self = Fraction(abs(self.n), abs(self.d))
 
-        if newSelf.n < 1 or newSelf.d < 1:
+        if new_self.n < 1 or new_self.d < 1:
             return 1
 
-        while newSelf.n != newSelf.d :
-            if newSelf.n > newSelf.d :
-                newSelf.n = newSelf.n - newSelf.d
-            else :
-                newSelf.d = newSelf.d - newSelf.n
+        while new_self.n != new_self.d:
+            if new_self.n > new_self.d:
+                new_self.n = new_self.n - new_self.d
+            else:
+                new_self.d = new_self.d - new_self.n
 
-        return newSelf.n
+        return new_self.n
 
+    @staticmethod
+    def pgcdr(n, d):
+        new_self = Fraction(abs(n), abs(d))
 
-    def pgcdr(self, n, d):
-        newSelf = Fraction(abs(n), abs(d))
-
-        if newSelf.n < 1 or newSelf.d < 1:
+        if new_self.n < 1 or new_self.d < 1:
             return 1
 
-        if newSelf.n == newSelf.d:
-            return newSelf.n
+        if new_self.n == new_self.d:
+            return new_self.n
 
-        elif newSelf.n > newSelf.d:
-            return newSelf.pgcdr(newSelf.n - newSelf.d, newSelf.d)
+        elif new_self.n > new_self.d:
+            return new_self.pgcdr(new_self.n - new_self.d, new_self.d)
         else:
-            return newSelf.pgcdr(newSelf.n, newSelf.d - newSelf.n)
-
+            return new_self.pgcdr(new_self.n, new_self.d - new_self.n)
 
     def reduce(self):
         pgcd = self.pgcd()
@@ -72,66 +71,32 @@ class Fraction:
         else:
             return self
 
-
     def __add__(self, other):
-        if type(other) is not Fraction:
-            fraction = Fraction(other, 1)
-        else:
-            fraction = other
-
-        if self.d != fraction.d:
-            newSelf     = Fraction(self.n * fraction.d, self.d * fraction.d)
-            newFraction = Fraction(fraction.n * self.d,fraction.d * self.d)
-
-        return Fraction(newSelf.n + newFraction.n, newSelf.d).reduce()
-
+        new_self = Fraction(self.n, self.d)
+        new_self.n = self.n * other.d + other.n * self.d
+        new_self.d = self.d * other.d
+        return new_self.reduce()
 
     def __sub__(self, other):
-        if type(other) is not Fraction:
-            fraction = Fraction(other, 1)
-        else:
-            fraction = other
-
-        if self.d != fraction.d:
-            newSelf     = Fraction(self.n * fraction.d, self.d * fraction.d)
-            newFraction = Fraction(fraction.n * self.d,fraction.d * self.d)
-
-        return Fraction(newSelf.n - newFraction.n, newSelf.d).reduce()
-
+        new_self = Fraction(self.n, self.d)
+        new_self.n = self.n * other.d - other.n * self.d
+        new_self.d = self.d * other.d
+        return new_self.reduce()
 
     def __mul__(self, other):
-        if type(other) is not Fraction:
-            fraction = Fraction(other, 1)
-        else:
-            fraction = other
-
-        newSelf     = Fraction(self.n, self.d)
-        newFraction = Fraction(fraction.n, fraction.d)
-
-        result      = Fraction(0, 0)
-        result.n    = newSelf.n * newFraction.n
-        result.d    = newSelf.d * newFraction.d
-
-        return result.reduce()
-
+        new_self = Fraction(self.n, self.d)
+        new_self.n = self.n * other.n
+        new_self.d = self.d * other.d
+        return new_self.reduce()
 
     def __truediv__(self, other):
-        if type(other) is not Fraction:
-            fraction = Fraction(other, 1)
-        else:
-            fraction = other
-
-        newSelf     = Fraction(self.n, self.d)
-        newFraction = Fraction(fraction.n, fraction.d)
-
-        result      = Fraction(0, 0)
-        result.n    = newSelf.n / newFraction.n
-        result.d    = newSelf.d / newFraction.d
-
-        return result.reduce()
+        inverse = Fraction(other.d, other.n)
+        new_self = Fraction(inverse.n * self.n, inverse.d * self.d)
+        return new_self.reduce()
 
     def display(self):
         print(self.n, '/', self.d)
+
 
 def main():
     f1 = Fraction(3, 5)
@@ -152,6 +117,7 @@ def main():
     print("Division de ce résultat à la première fonction : ")
     f6 = f5 / f1
     f6.display()
+
 
 if __name__ == "__main__":
     main()
