@@ -8,147 +8,91 @@
 #   A vous de réitérer cet exploit et afficher le resultat à votre écran en
 #   moins de temps que ce monsieur et en FRANCAIS.
 
-def numberToLetters(number):
-    newNumber = number
-    i = 10
-    list = []
-    while newNumber != 0:
-        val = newNumber % i
-        list.append(val)
-        i = i * 10
-        newNumber -= val
 
-    dic = {
-        0: "", 1: "un", 2: "deux", 3: "trois", 4: "quatre", 5: "cinq",
-        6: "six", 7: "sept", 8: "huit", 9: "neuf", 10: "dix", 11: "onze",
-        12: "douze", 13: "treize", 14: "quatorze", 15: "quinze", 16: "seize",
-        20: "vingt", 30: "trente", 40: "quarante", 50: "cinquante",
-        60: "soixante", 80: "quatre-vingt", 100: "cent", 1000: "mille"
-            }
+def number_to_letters(size):
+    result = ""
+    size = str(size)
 
-    sentence = ""
+    for i in range(0, len(size)):
+        number = size[i]
 
-    nbrSpeciaux = False
+        k = ""
+        if 2 == (len(size) - i) % 3:
+            if number == '1':
+                k = "dix"
+            elif number == '2':
+                k = "vingt"
+            elif number == '3':
+                k = "trente"
+            elif number == '4':
+                k = "quarante"
+            elif number == '5':
+                k = "cinquante"
+            elif number == '6':
+                k = "soixante"
+            elif number == '7':
+                k = "soixante dix"
+            elif number == '8':
+                k = "quatre vingt"
+            elif number == '9':
+                k = "quatre vingt  dix"
+        elif 1 == (len(size) - i) % 3 or 0 == (len(size) - i) % 3:
+            if number == '1':
+                k = "un"
+            elif number == '2':
+                k = "deux"
+            elif number == '3':
+                k = "trois"
+            elif number == '4':
+                k = "quatre"
+            elif number == '5':
+                k = "cinq"
+            elif number == '6':
+                k = "six"
+            elif number == '7':
+                k = "sept"
+            elif number == '8':
+                k = "huit"
+            elif number == '9':
+                k = "neuf"
 
-    for datum in reversed(list):
-        if len(str(datum)) == 7:
-            if int(str(datum)[0]) != 1:
-                sentence += dic[int(str(datum)[0])] + "-millions-"
-            else:
-                sentence += dic[int(str(datum)[0])] + "-million-"
+        if 0 == (len(size) - i) % 3:
+            k += " cent"
+        elif 0 == (len(size) - i) % 4 and (len(size) - i) < 7:
+            k += " mille"
+        elif 0 == (len(size) - i) % 7:
+            k += " millions"
 
-        if len(str(datum)) == 6:
-            sentence += dic[int(str(datum)[0])] + "-cent-"
+        result += k + " "
 
-        if len(str(datum)) == 5:
-            if int(str(datum)[0]) == 1:
-                sentence += dic[10] + "-mille-"
-            if int(str(datum)[0]) == 2:
-                sentence += dic[20] + "-mille-"
-            if int(str(datum)[0]) == 3:
-                sentence += dic[30] + "-mille-"
-            if int(str(datum)[0]) == 4:
-                sentence += dic[40] + "-mille-"
-            if int(str(datum)[0]) == 5:
-                sentence += dic[50] + "-mille-"
-            if int(str(datum)[0]) == 6:
-                sentence += dic[60] + "-mille-"
-            if int(str(datum)[0]) == 7:
-                sentence += dic[60] + "-"
-                nbrSpeciaux = True
-            if int(str(datum)[0]) == 8:
-                sentence += dic[80] + "-mille-"
-            if int(str(datum)[0]) == 9:
-                sentence += dic[80] + "-"
-                nbrSpeciaux = True
+        result = result.replace("dix un", "onze")
+        result = result.replace("dix deux", "douze")
+        result = result.replace("dix trois", "treize")
+        result = result.replace("dix quatre", "quatorze")
+        result = result.replace("dix cinq", "quinze")
+        result = result.replace("dix six", "seize")
+        result = result.replace("soixante dix un", "soixante et onze")
+        result = result.replace("soixante dix deux", "soixante douze")
+        result = result.replace("soixante dix trois", "soixante treize")
+        result = result.replace("soixante dix quatre", "soixante quatorze")
+        result = result.replace("soixante dix cinq", "soixante quinze")
+        result = result.replace("soixante dix six", "soixante seize")
+        result = result.replace("quatre vingt dix un", "quatre vingt onze")
+        result = result.replace("quatre vingt dix deux", "quatre vingt douze")
+        result = result.replace("quatre vingt dix trois", "quatre vingt treize")
+        result = result.replace("quatre vingt dix quatre", "quatre vingt quatorze")
+        result = result.replace("quatre vingt dix cinq", "quatre vingt quinze")
+        result = result.replace("quatre vingt dix six", "quatre vingt seize")
+        result = result.replace("un cent", "cent")
+        result = result.replace("un mille", "mille")
 
-        if len(str(datum)) == 4:
-            if nbrSpeciaux == True:
-                if int(str(datum)[0]) == 1:
-                    sentence += dic[11] + "-mille-"
-                if int(str(datum)[0]) == 2:
-                    sentence += dic[12] + "-mille-"
-                if int(str(datum)[0]) == 3:
-                    sentence += dic[13] + "-mille-"
-                if int(str(datum)[0]) == 4:
-                    sentence += dic[14] + "-mille-"
-                if int(str(datum)[0]) == 5:
-                    sentence += dic[15] + "-mille-"
-                if int(str(datum)[0]) == 6:
-                    sentence += dic[16] + "-mille-"
-                if int(str(datum)[0]) == 7:
-                    sentence += dic[10] + "-" + dic[7] + "-mille-"
-                if int(str(datum)[0]) == 8:
-                    sentence += dic[10] + "-" + dic[8] + "-mille-"
-                if int(str(datum)[0]) == 9:
-                    sentence += dic[10] + "-" + dic[9] + "-mille-"
+    return result
 
-                nbrSpeciaux = False
-            else:
-                sentence += dic[int(str(datum)[0])] + "-mille-"
-
-        if len(str(datum)) == 3:
-            sentence += dic[int(str(datum)[0])] + "-cent-"
-
-        if len(str(datum)) == 2:
-            if int(str(datum)[0]) == 1:
-                nbrSpeciaux = True
-            if int(str(datum)[0]) == 2:
-                sentence += dic[20] + '-et-'
-            if int(str(datum)[0]) == 3:
-                sentence += dic[30]
-            if int(str(datum)[0]) == 4:
-                sentence += dic[40]
-            if int(str(datum)[0]) == 5:
-                sentence += dic[50]
-            if int(str(datum)[0]) == 6:
-                sentence += dic[60]
-            if int(str(datum)[0]) == 7:
-                sentence += dic[60] + "-"
-                nbrSpeciaux = True
-            if int(str(datum)[0]) == 8:
-                sentence += dic[80]
-            if int(str(datum)[0]) == 9:
-                sentence += dic[80] + "-"
-                nbrSpeciaux = True
-
-        if len(str(datum)) == 1:
-            if nbrSpeciaux == True:
-                if int(str(datum)[0]) == 0:
-                    sentence += dic[10]
-                if int(str(datum)[0]) == 1:
-                    sentence += dic[11]
-                if int(str(datum)[0]) == 2:
-                    sentence += dic[12]
-                if int(str(datum)[0]) == 3:
-                    sentence += dic[13]
-                if int(str(datum)[0]) == 4:
-                    sentence += dic[14]
-                if int(str(datum)[0]) == 5:
-                    sentence += dic[15]
-                if int(str(datum)[0]) == 6:
-                    sentence += dic[16]
-                if int(str(datum)[0]) == 7:
-                    sentence += dic[10] + "-" + dic[7]
-                if int(str(datum)[0]) == 8:
-                    sentence += dic[10] + "-" + dic[8]
-                if int(str(datum)[0]) == 9:
-                    sentence += dic[10] + "-" + dic[9]
-
-                nbrSpeciaux = False
-            else:
-                sentence += dic[int(str(datum)[0])]
-
-    if sentence[-1] == "-":
-        sentence =  sentence[:-1]
-
-    print(sentence)
 
 def main():
-    for i in range(1, 10001):
-        print(i)
-        numberToLetters(i)
-#    numberToLetters(70)
+    for i in range(1, 1000000):
+        print(number_to_letters(i))
+
 
 if __name__ == "__main__":
     main()
