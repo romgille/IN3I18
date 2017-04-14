@@ -36,53 +36,56 @@
 
 import re
 
-class doublyLinkedNode:
+
+class Doublylinkednode:
     def __init__(self, prev, next, data):
         self.prev = prev
         self.next = next
         self.data = data
 
-class doublyLinkedList:
-    def __init__(self, firstNode, lastNode):
-        self.firstNode = firstNode
-        self.lastNode = lastNode
+
+class Doublylinkedlist:
+    def __init__(self, first_node, last_node):
+        self.firstNode = first_node
+        self.lastNode = last_node
 
     def push_first(self, data):
-        if self.firstNode != None:
-            newNode = doublyLinkedNode(None, self.firstNode, data)
+        if self.firstNode is not None:
+            newNode = Doublylinkednode(None, self.firstNode, data)
             self.firstNode.prev = newNode
             self.firstNode = newNode
         else:
-            newNode = doublyLinkedNode(None, None, data)
+            newNode = Doublylinkednode(None, None, data)
             self.firstNode = newNode
             self.lastNode = newNode
 
     def pop_first(self):
-        if self.firstNode != None:
+        if self.firstNode is not None:
             self.firstNode = self.firstNode.next
 
     def push_last(self, data):
-        if self.lastNode != None:
-            newNode = doublyLinkedNode(self.lastNode, None, data)
+        if self.lastNode is not None:
+            newNode = Doublylinkednode(self.lastNode, None, data)
             self.lastNode.next = newNode
             self.lastNode = newNode
         else:
-            newNode = doublyLinkedNode(None, None, data)
+            newNode = Doublylinkednode(None, None, data)
             self.lastNode = newNode
             self.firstNode = newNode
 
-    def pop_first(self):
-        if self.lastNode != None:
+    def pop_last(self):
+        if self.lastNode is not None:
             self.lastNode = self.lastNode.prev
 
-def isPalindrome(string):
+
+def is_palindrome(string):
     if not string.isalpha():
         string = re.sub('(?:\W)', '', string)
 
     if not string.islower():
         string = string.lower()
 
-    dLL = doublyLinkedList(None, None)
+    dLL = Doublylinkedlist(None, None)
     for i in string:
         dLL.push_last(i)
 
@@ -98,7 +101,6 @@ def isPalindrome(string):
     return 'Ce n\'est pas un palindrome \n'
 
 
-
 def main():
     strings = [
         'Esope reste ici et se repose', 'A man a plan a canal Panama',
@@ -107,7 +109,8 @@ def main():
 
     for string in strings:
         print(string)
-        print(isPalindrome(string))
+        print(is_palindrome(string))
+
 
 if __name__ == '__main__':
     main()
